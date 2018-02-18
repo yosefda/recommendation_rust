@@ -1,4 +1,4 @@
-# Recommendation (Rust)#
+# Recommendation (Rust)
 
 Movie recommendations implemented in Rust.
 
