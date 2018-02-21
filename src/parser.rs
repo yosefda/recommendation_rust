@@ -1,7 +1,14 @@
-/// Definitions for custom error types.
-
+use std::result;
 use std::fmt;
 use std::error;
+
+/// ParserResult type.
+pub type ParserResult<T> = result::Result<T, ParserError>;
+
+/// Trait that defines anything that parseable.
+pub trait Parseable {
+    fn parse(&self) -> ParserResult<()>;
+}
 
 /// Parser/parsing related errors.
 #[derive(Debug, Clone)]
@@ -21,12 +28,11 @@ impl error::Error for ParserError {
     }
 }
 
-
 #[cfg(test)]
-mod parsererror_test {
+mod parser_test {
 
     use std::error::Error;
-    use error::ParserError;
+    use parser::ParserError;
 
     fn return_parsererror() -> Result<String, ParserError> {
         return Err(ParserError {

@@ -1,8 +1,4 @@
-//pub trait DTO {
-//    fn get(&self) -> &Self;
-//}
-
-
+/// Value object for movie showing.
 #[derive(Debug)]
 pub struct MovieShowing {
     pub name: String,
@@ -11,18 +7,10 @@ pub struct MovieShowing {
     pub showings: Vec<String>
 }
 
-//impl DTO for MovieShowing {
-//    fn get(&self) -> &Self {
-//        &self
-//    }
-//}
-
-
 #[cfg(test)]
-mod dto_test {
+mod value_test {
 
     use value::MovieShowing;
-//    use dto::DTO;
 
     #[test]
     fn test_movieshowing_creation() {
@@ -38,19 +26,4 @@ mod dto_test {
         assert_eq!(vec!["Drama"], movie.genres);
         assert_eq!(vec!["19:00:00+11:00".to_owned()], movie.showings);
     }
-
-//    #[test]
-//    fn test_movingshowing_get() {
-//        let movie = MovieShowing {
-//            name: "Movie".to_owned(),
-//            rating: 80,
-//            genres: vec!["Drama".to_owned()],
-//            showings: vec!["19:00:00+11:00".to_owned()]
-//        };
-//
-//        assert_eq!("Movie".to_owned(), movie.get().name);
-//        assert_eq!(80, movie.get().rating);
-//        assert_eq!(vec!["Drama"], movie.get().genres);
-//        assert_eq!(vec!["19:00:00+11:00".to_owned()], movie.get().showings);
-//    }
 }
