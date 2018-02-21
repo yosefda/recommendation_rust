@@ -2,27 +2,27 @@ use std::result;
 use std::fmt;
 use std::error;
 
-/// ParserResult type.
-pub type ParserResult<T> = result::Result<T, ParserError>;
-
-/// Trait that defines anything that parseable.
-pub trait Parseable {
-    fn parse(&self) -> ParserResult<()>;
-}
-
-/// Parser/parsing related errors.
+// Parser/parsing related errors.
 #[derive(Debug, Clone)]
-pub struct ParserError {
+pub struct Error {
     pub message: String
 }
 
-impl fmt::Display for ParserError {
-    fn fmt(&self, f: &mut fmt::Formatter) -> Result<(), fmt::Error> {
+// ParserResult type.
+pub type Result<T> = result::Result<T, Error>;
+
+// Trait that defines anything that parseable.
+pub trait Parseable {
+    fn parse(&self) -> Result<()>;
+}
+
+impl fmt::Display for Error {
+    fn fmt(&self, f: &mut fmt::Formatter) -> result::Result<(), fmt::Error> {
         write!(f, "{}", self.message)
     }
 }
 
-impl error::Error for ParserError {
+impl error::Error for Error {
     fn description(&self) -> &str {
         &self.message
     }
@@ -31,11 +31,11 @@ impl error::Error for ParserError {
 #[cfg(test)]
 mod parser_test {
 
+    use parser;
     use std::error::Error;
-    use parser::ParserError;
 
-    fn return_parsererror() -> Result<String, ParserError> {
-        return Err(ParserError {
+    fn return_parsererror() -> parser::Result<String> {
+        return Err(parser::Error {
             message: "failed to parse something".to_owned()
         });
     }

@@ -1,6 +1,13 @@
 mod value;
 use value::*;
 mod parser;
+use std::error::Error;
+
+fn return_parsererror() -> parser::Result<String> {
+    return Err(parser::Error {
+        message: "failed to parse something".to_owned()
+    });
+}
 
 fn main() {
     let moonlight = MovieShowing {
@@ -11,4 +18,7 @@ fn main() {
     };
 
     println!("{:?}", moonlight);
+
+    let result = return_parsererror();
+    println!("{:?}", result.err().unwrap().description());
 }

@@ -1,4 +1,4 @@
-/// Value object for movie showing.
+// Value object for movie showing.
 #[derive(Debug)]
 pub struct MovieShowing {
     pub name: String,
