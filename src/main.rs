@@ -1,6 +1,11 @@
 mod value;
 use value::*;
 
+mod error;
+//use error::*;
+
+mod parseable;
+
 fn main() {
     let moonlight = MovieShowing {
         name: "Moonlight".to_owned(),
