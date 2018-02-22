@@ -13,7 +13,8 @@ pub type Result<T> = result::Result<T, Error>;
 
 // Trait that defines anything that parseable.
 pub trait Parseable {
-    fn parse(&self) -> Result<()>;
+    type ParsedData;
+    fn parse(&self) -> Result<Self::ParsedData>;
 }
 
 impl fmt::Display for Error {

@@ -1,7 +1,10 @@
+extern crate serde_json;
+
 mod value;
 use value::*;
 mod parser;
 use std::error::Error;
+mod acme_json_data;
 
 fn return_parsererror() -> parser::Result<String> {
     return Err(parser::Error {
