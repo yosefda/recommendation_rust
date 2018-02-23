@@ -134,7 +134,6 @@ mod acme_json_data_test {
         assert!(data.parse().is_err());
     }
 
-
     #[test]
     fn test_parse_invalid_acme_json_data() {
         let data = ACMEJsonData {
@@ -157,22 +156,11 @@ mod acme_json_data_test {
         assert!(data.parse().is_err());
     }
 
+    #[test]
     fn test_parse_empty_list_acme_json_data() {
         let data = ACMEJsonData {
             json: r#"
-                [
-                    {
-                        "name": "Moonlight",
-                        "rating": 98,
-                        "genres": [
-                        "Drama"
-                        ],
-                        "showings": [
-                        "18:30:00+11:00",
-                        "20:30:00+11:00"
-                        ]
-                    },
-                ]"#.to_owned()
+                []"#.to_owned()
         };
 
         assert!(data.parse().unwrap().is_empty());

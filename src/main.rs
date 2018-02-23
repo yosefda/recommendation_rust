@@ -1,10 +1,12 @@
 extern crate serde_json;
+extern crate reqwest;
 
 mod value;
 use value::*;
 mod parser;
 use std::error::Error;
 mod acme_json_data;
+mod fetcher;
 
 fn return_parsererror() -> parser::Result<String> {
     return Err(parser::Error {
