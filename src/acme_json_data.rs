@@ -12,6 +12,7 @@ pub struct ACMEJsonData {
     pub json: String
 }
 
+
 impl parser::Parseable for ACMEJsonData {
     type ParsedData = Vec<value::MovieShowing>;
     fn parse(&self) -> parser::Result<Self::ParsedData> {
@@ -38,8 +39,9 @@ impl parser::Parseable for ACMEJsonData {
 
         Ok(movie_showings)
     }
-
 }
+
+
 
 #[cfg(test)]
 mod acme_json_data_test {
@@ -84,7 +86,7 @@ mod acme_json_data_test {
 
     #[test]
     fn test_parse_acme_json_data() {
-        let acme_json = ACMEJsonData {
+        let data = ACMEJsonData {
             json: r#"
                 [
                     {
@@ -114,14 +116,65 @@ mod acme_json_data_test {
                 ]"#.to_owned()
         };
 
-        let parsed_data = acme_json.parse().unwrap();
+        let parsed_data = data.parse().unwrap();
         assert_eq!(2, parsed_data.len());
 
         assert_eq!("Moonlight".to_owned(), parsed_data[0].name);
         assert_eq!(98, parsed_data[0].rating);
         assert_eq!(vec!["Drama"], parsed_data[0].genres);
         assert_eq!(vec!["18:30:00+11:00", "20:30:00+11:00"], parsed_data[0].showings);
+    }
 
-        println!("{:?}", parsed_data[0]);
+    #[test]
+    fn test_parse_empty_acme_json_data() {
+        let data = ACMEJsonData{
+            json: "".to_owned()
+        };
+
+        assert!(data.parse().is_err());
+    }
+
+
+    #[test]
+    fn test_parse_invalid_acme_json_data() {
+        let data = ACMEJsonData {
+            json: r#"
+                [
+                    {
+                        "name": "Moonlight",
+                        "rating": 98,
+                        "genres": [
+                        "Drama"
+                        ],
+                        "showings": [
+                        "18:30:00+11:00",
+                        "20:30:00+11:00"
+                        ]
+                    },
+                ]"#.to_owned()
+        };
+
+        assert!(data.parse().is_err());
+    }
+
+    fn test_parse_empty_list_acme_json_data() {
+        let data = ACMEJsonData {
+            json: r#"
+                [
+                    {
+                        "name": "Moonlight",
+                        "rating": 98,
+                        "genres": [
+                        "Drama"
+                        ],
+                        "showings": [
+                        "18:30:00+11:00",
+                        "20:30:00+11:00"
+                        ]
+                    },
+                ]"#.to_owned()
+        };
+
+        assert!(data.parse().unwrap().is_empty());
     }
 }
