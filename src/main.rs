@@ -7,6 +7,7 @@ mod parser;
 use std::error::Error;
 mod acme_json_data;
 mod fetcher;
+mod strategy;
 
 fn return_parsererror() -> parser::Result<String> {
     return Err(parser::Error {
