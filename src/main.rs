@@ -1,6 +1,9 @@
+extern crate serde_json;
+
 mod parser;
 mod acme_movie;
 mod value;
+mod error;
 
 use parser::Parseable;
 
