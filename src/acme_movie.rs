@@ -22,7 +22,7 @@ impl JsonSource {
 
 impl parser::Parseable for JsonSource {
     type Output = value::MovieShowing;
-    fn parse(&self) -> Result<Vec<Self::Output>,  error::Error> {
+    fn parse(&self) -> parser::Result<Vec<Self::Output>> {
         // deserialise json
         let json_data: serde_json::Value = try!(serde_json::from_str(&self.json_string));
 

@@ -1,9 +1,11 @@
 extern crate serde_json;
+extern crate reqwest;
 
 mod parser;
 mod acme_movie;
 mod value;
 mod error;
+mod fetcher;
 
 use parser::Parseable;
 
