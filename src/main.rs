@@ -6,6 +6,7 @@ mod acme_movie;
 mod value;
 mod error;
 mod fetcher;
+mod strategy;
 
 use parser::Parseable;
 
